@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const registerUser = require("../controllers/user.controller")
 const upload = require('../middlewares/multer')
-const loginUser = require("../controllers/user.controller");
-const logoutUser = require("../controllers/user.controller");
+const { registerUser, loginUser, logoutUser,refreshAccessToken } = require("../controllers/user.controller");
+
 const verifyJWT = require('../middlewares/auth');
 
 router.route("/register").post(
@@ -21,5 +20,6 @@ router.route("/register").post(
 
 router.route("/login").post(loginUser)
 router.route("/logout").post(verifyJWT,logoutUser)
+router.route("/refresh-token").post(refreshAccessToken)
 
 module.exports = router;
